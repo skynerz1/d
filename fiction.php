@@ -26,7 +26,7 @@ $sss = file_get_contents('sss.txt');
 $bott = bot('getme',['bot'])->result->username;
 $alm = file_get_contents('alm.txt');
 $ccoinj = file_get_contents("ccoin.txt");
-$admin = 1390519416; #ايديك
+$admin = 1965941065; #ايديك
 $ccoin = file_get_contents("ccoin.txt");
 $$codejj = file_get_contents("codejj.json");
 $salesnem = file_get_contents("salesnem.json");
@@ -121,7 +121,7 @@ if($hdiatet == "✅"){
 	}
 	
 	
-$admin = 1390519416; #ايديك
+$admin = 1965941065; #ايديك
    
   $setting = json_decode(file_get_contents("setting.json"),true);
 if (!file_exists("setting.json")) {
