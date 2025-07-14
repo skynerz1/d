@@ -1,14 +1,12 @@
 <?php
 session_start();
 
-$data = json_decode(file_get_contents("php://input"), true);
-
-if (isset($data['id'])) {
-    $_SESSION['id'] = $data['id'];
-    $_SESSION['first_name'] = $data['first_name'] ?? '';
-    $_SESSION['username'] = $data['username'] ?? '';
-    $_SESSION['photo_url'] = $data['photo_url'] ?? '';
-    echo "saved";
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $_SESSION['id'] = $_POST['id'] ?? '';
+    $_SESSION['first_name'] = $_POST['first_name'] ?? '';
+    $_SESSION['username'] = $_POST['username'] ?? '';
+    $_SESSION['photo_url'] = $_POST['photo_url'] ?? '';
+    echo 'تم الحفظ';
 } else {
-    echo "invalid";
+    echo 'طلب غير صالح';
 }
