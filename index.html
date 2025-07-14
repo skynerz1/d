@@ -1,38 +1,30 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Telegram WebApp</title>
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin-top: 50px;
-      background-color: #f9f9f9;
-    }
-    .loader {
-      font-size: 18px;
-      color: #555;
-    }
-  </style>
+    <title>ربط تيليجرام</title>
+    <meta charset="UTF-8">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-  <h2 class="loader">جاري تحميل معلوماتك من Telegram...</h2>
+    <h2>جارٍ تسجيل دخولك من تيليجرام...</h2>
 
-  <script>
-    const tg = window.Telegram.WebApp;
-    const user = tg.initDataUnsafe.user;
+    <script>
+    Telegram.WebApp.ready();
+
+    const user = Telegram.WebApp.initDataUnsafe.user;
 
     fetch("save_user.php", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(user)
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+            id: user.id,
+            first_name: user.first_name,
+            username: user.username,
+            photo_url: user.photo_url
+        })
     }).then(() => {
-      window.location.href = "profile.php";
-    }).catch(() => {
-      document.querySelector(".loader").textContent = "فشل تحميل المعلومات.";
+        window.location.href = "profile.php";
     });
-  </script>
+    </script>
 </body>
 </html>
