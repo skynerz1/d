@@ -3,7 +3,7 @@
 #تغير حقوق تدل علامه فشلك 
 ####@JJJ22J @SEROBOTS ####
 ob_start();
-$token = "1647752298:AAGGyHX53a-BKROt-3pWgJbGGQwzZ6xW938"; 
+$token = "6345801560:AAGKlm_mh_CK-OCaU9PE4DexJq2FUMC1CM8"; 
 define("API_KEY",$token);
 echo file_get_contents("https://api.telegram.org/bot" . API_KEY . "/setwebhook?url=" . $_SERVER['SERVER_NAME'] . "" . $_SERVER['SCRIPT_NAME']);
 function bot($method,$datas=[]){
