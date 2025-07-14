@@ -1,9 +1,24 @@
 <?php
 session_start();
-if (!isset($_SESSION['id'])) {
+include 'config.php';
+
+// مثال بسيط: جلب id من الجلسة أو GET
+$user_id = $_SESSION['id'] ?? ($_GET['id'] ?? 0);
+
+if ($user_id == 0) {
     echo "لم يتم العثور على بيانات مستخدم.";
     exit;
 }
+
+$sql = "SELECT * FROM users WHERE id = $user_id LIMIT 1";
+$result = $conn->query($sql);
+
+if ($result->num_rows == 0) {
+    echo "المستخدم غير موجود.";
+    exit;
+}
+
+$user = $result->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
@@ -38,9 +53,9 @@ if (!isset($_SESSION['id'])) {
     </style>
 </head>
 <body>
-    <h2>مرحباً، <?php echo $_SESSION['first_name']; ?> 👋</h2>
-    <p class="info">اسم المستخدم: @<?php echo $_SESSION['username']; ?></p>
-    <img src="<?php echo $_SESSION['photo_url']; ?>" width="150" alt="الصورة">
+    <h2>مرحباً، <?php echo htmlspecialchars($user['first_name']); ?> 👋</h2>
+    <p class="info">اسم المستخدم: @<?php echo htmlspecialchars($user['username']); ?></p>
+    <img src="<?php echo htmlspecialchars($user['photo_url']); ?>" width="150" alt="الصورة">
     <br>
     <a class="back" href="https://t.me/اسم_البوت_هنا">رجوع إلى البوت</a>
 </body>
